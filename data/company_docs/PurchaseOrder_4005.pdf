@@ -1,0 +1,305 @@
+Error: Column 'ItemID' does not belong to table Table.Error: Column 'ItemID' does not belong to table Table.
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><title>
+	PO Dashboard
+</title><link href="../Styles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+          /* Body styling */
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header styling */
+.header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.header h1 {
+    font-size: 20px;
+    color: #444;
+}
+
+/* Filter area */
+.filter {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.filter label {
+    font-size: 14px;
+    color: #333;
+}
+
+.filter input, .filter select {
+    padding: 6px;
+    margin: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-info {
+    background-color: #5bc0de;
+    color: white;
+}
+
+/* GridView styling */
+.gridview {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.gridview th, .gridview td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.gridview th {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.gridview tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.gridview tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Status classes */
+.approved {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.rejected {
+    color: #FF6347;
+    font-weight: bold;
+}
+
+.pending {
+    color: #FFA500;
+    font-weight: bold;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea.form-control {
+    height: 80px;
+}
+
+
+    </style>
+</head>
+<body>
+    <form name="form1" method="post" action="./viewdashboardpo.aspx" id="form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTEzNzIwNzAxNw9kFgICAw9kFgICCg88KwARAwAPFgQeC18hRGF0YUJvdW5kZx4LXyFJdGVtQ291bnQCAWQBEBYAFgAWAAwUKwAAFgJmD2QWBgIBD2QWEgIBDw8WAh4EVGV4dAUMUE9SLTAwMS0yMDI1ZGQCAg8PFgIfAgUTMjg2NjMsIDI4NjYyLCAyODY2MGRkAgMPDxYCHwIFF1RlY2ggU3VwcGxpZXMgUHZ0LiBMdGQuZGQCBA8PFgIfAgUM4oK5IDYsNTQ3LjAwZGQCBQ8PFgIfAgULMjktQXByLTIwMjVkZAIGD2QWBAIBDw8WBh8CBQdQZW5kaW5nHghDc3NDbGFzcwUHcGVuZGluZx4EXyFTQgICZGQCAw8PFgYeD0NvbW1hbmRBcmd1bWVudAUENDAwNR8CBQdQZW5kaW5nHgdWaXNpYmxlaGRkAgcPZBYEAgEPDxYGHwIFB1BlbmRpbmcfAwUHcGVuZGluZx8EAgJkZAIDDw8WBB8FBQQ0MDA1HwZoZGQCCA9kFgQCAQ8PFgYfAgUHUGVuZGluZx8DBQdwZW5kaW5nHwQCAmRkAgMPDxYEHwUFBDQwMDUfBmhkZAIJD2QWBgIBDw8WAh8FBQQ0MDA1ZGQCAw8PFgIfBQUENDAwNWRkAgUPDxYCHwUFBDQwMDVkZAICDw8WAh8GaGRkAgMPDxYCHwZoZGQYAQUNZ3ZQT0Rhc2hib2FyZA88KwAMAQgCAWQqBy6GogsulYzUXuzMdgMT5HSzIKD2ZG+dnWJ4Y/OCGg==" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="7BD684A9" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdABAbVByoBMDhAzjzyRiLSGEZr6mIk+G7x11V7qPD0tKHMmZHWH133dtBfkFsq6ApcVdD3GLC+epxx/SzcOhCXldJOhl9/XsBRVzBHlMefupGa7rZiRCqc8WDJESCLLHi21qO1N1XNFmfsMXJasjxX85jFeAXEQcuzxAAOHnutYgGN0CZDHzsJ3XJFkSK6Prw+G0E8YQITXxMBj1JyeOgCkTD60gdZnS0xVsL9qgVHxINZWITNEqahperEPVkMxxe8y4/T7OSAAeJSX6O21FX4iFgTduXRjn/1dezKEavMWLC/NwoIqnAnecjgADKnvOkFd5MZDXgOKBKzxhOmybFuQZcPJYsdpUTE/vYfo23YzD1NKcM7LTkgwHn/TSyitP9/xo=" />
+</div>
+        <input type="hidden" name="hdnUserID" id="hdnUserID" />
+        <input type="hidden" name="hdnCurrentPOID" id="hdnCurrentPOID" />
+
+        <div class="header">
+            <h1>Purchase Order Dashboard</h1>
+            
+        </div>
+
+        <div class="filter">
+            <span id="lblFromDate">From Date:</span>
+            <input name="txtFromDate" type="date" value="2025-03-03" id="txtFromDate" />
+            <span id="lblToDate">To Date:</span>
+            <input name="txtToDate" type="date" value="2025-05-03" id="txtToDate" />
+            <span id="lblKeyword">Keyword:</span>
+            <input name="txtKeyword" type="text" id="txtKeyword" />
+            <input type="submit" name="btnSearch" value="Search" id="btnSearch" class="btn btn-info" />
+        </div>
+
+        <div>
+	<table class="gridview" cellspacing="0" rules="all" border="1" id="gvPODashboard" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">PO Number</th><th scope="col">Indent Numbers</th><th scope="col">Vendor</th><th scope="col">Total Amount</th><th scope="col">PO Date</th><th scope="col">P H Approval</th><th scope="col">Commercial M Approval</th><th scope="col">MD Approval</th><th scope="col">Actions</th>
+		</tr><tr>
+			<td>POR-001-2025</td><td>28663, 28662, 28660</td><td>Tech Supplies Pvt. Ltd.</td><td>₹ 6,547.00</td><td>29-Apr-2025</td><td>
+                    <span id="gvPODashboard_ctl02_lblPlantHead" class="pending">Pending</span>
+
+                    
+                        </td><td>
+                            <span id="gvPODashboard_ctl02_lblcmapproval" class="pending">Pending</span>
+
+                            
+                        </td><td>
+                            <span id="gvPODashboard_ctl02_lblMDApproval" class="pending">Pending</span>
+
+                            
+                        </td><td>
+                        <input type="submit" name="gvPODashboard$ctl02$btnView" value="View" id="gvPODashboard_ctl02_btnView" class="btn btn-info btn-sm" />
+                        <input type="submit" name="gvPODashboard$ctl02$btnEdit" value="Edit" id="gvPODashboard_ctl02_btnEdit" class="btn btn-warning btn-sm" />
+                        <input type="submit" name="gvPODashboard$ctl02$btnPrint" value="Print" id="gvPODashboard_ctl02_btnPrint" class="btn btn-secondary btn-sm" />
+
+                    </td>
+		</tr>
+	</table>
+</div>
+        <input type="hidden" name="hfPOID" id="hfPOID" />
+        <!-- Approval Modal -->
+        <input type="hidden" name="HiddenField1" id="HiddenField1" />
+            <!-- Approval Modal -->
+            <div id="approvalModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>PO Approval</h2>
+                    <div class="form-group">
+                        <span id="lblPONumber" style="font-weight:bold;">PO Number: </span>
+                    </div>
+                    <div class="form-group">
+                        <span id="lblVendor" style="font-weight:bold;">Vendor: </span>
+                    </div>
+                    <div class="form-group">
+                        <span id="lblTotalAmount" style="font-weight:bold;">Total Amount: </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlApprovalStatus">Approval Status:</label>
+                        <select name="ddlApprovalStatus" id="ddlApprovalStatus" class="form-control" onchange="toggleMDCheckbox(this)">
+	<option selected="selected" value="1">Approve</option>
+	<option value="0">Reject</option>
+
+</select>
+                    </div>
+
+                    <!-- Only show this div if user ID is 10 -->
+                    
+                    <div class="form-group">
+                        <label for="txtRemarks">Remarks:</label>
+                        <textarea name="txtRemarks" rows="2" cols="20" id="txtRemarks" class="form-control">
+</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" name="btnSubmitApproval" value="Submit" id="btnSubmitApproval" class="btn btn-success" />
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+
+        <script type="text/javascript">
+            function openModal() {
+                document.getElementById('approvalModal').style.display = 'block';
+            }
+
+            function closeModal() {
+                document.getElementById('approvalModal').style.display = 'none';
+            }
+
+            // Close modal when clicking outside of it
+            window.onclick = function (event) {
+                var modal = document.getElementById('approvalModal');
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+            function toggleMDCheckbox(dropdown) {
+                var selectedValue = dropdown.value;
+                var mdDiv = document.getElementById("mdApprovalDiv");
+
+                if (selectedValue === "1") {
+                    mdDiv.style.display = "block";
+                } else {
+                    mdDiv.style.display = "none";
+                }
+            }
+
+            window.onload = function () {
+                var ddl = document.getElementById('ddlApprovalStatus');
+                toggleMDCheckbox(ddl);
+            };
+        </script>
+    </form>
+</body>
+</html>

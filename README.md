@@ -4,20 +4,6 @@ A lightweight Retrieval-Augmented Generation (RAG) assistant built with **Stream
 
 ---
 
-## 📁 Project Structure
-
-rag_ai_assistant/
-├── app.py # Streamlit UI
-├── ingest.py # Ingest + embed documents using SentenceTransformer
-├── rag_engine.py # Core RAG logic with FAISS + Ollama LLM
-├── data/
-│ └── company_docs/ # 📄 Place your PDF files here
-├── vectordb/
-│ └── faiss_index.bin # 📦 Local FAISS vector store
-├── requirements.txt # ✅ All dependencies
-
----
-
 ## 🧠 Step-by-Step Setup
 
 ### 1️⃣ Install Ollama + Mistral LLM
